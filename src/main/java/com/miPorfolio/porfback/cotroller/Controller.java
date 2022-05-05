@@ -3,11 +3,13 @@ package com.miPorfolio.porfback.cotroller;
 import com.miPorfolio.porfback.model.Experiencia;
 import com.miPorfolio.porfback.model.Header;
 import com.miPorfolio.porfback.model.Persona;
+import com.miPorfolio.porfback.model.Proyect;
 import com.miPorfolio.porfback.model.Skill;
 import com.miPorfolio.porfback.model.Study;
 import com.miPorfolio.porfback.service.IExperienciaService;
 import com.miPorfolio.porfback.service.IHeaderService;
 import com.miPorfolio.porfback.service.IPersonaService;
+import com.miPorfolio.porfback.service.IProyectService;
 import com.miPorfolio.porfback.service.ISkillService;
 import com.miPorfolio.porfback.service.IStudyService;
 import java.util.List;
@@ -20,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author jj_roma
- */
 
 @RestController
 public class Controller {
@@ -32,6 +31,8 @@ public class Controller {
     @Autowired ISkillService habilServ;
     @Autowired IExperienciaService expServ;
     @Autowired IHeaderService headServ;
+    @Autowired IProyectService proServ;
+
     
 //--------------------------- PERSONA ------------------------------  
     @PostMapping("/persona/new")
@@ -138,7 +139,25 @@ public class Controller {
     public void acualizaHeader(@RequestBody Header head ){
         headServ.actualizarHeder(head);
     } 
-
 //-------------------------------------------------------------------------    
-  
+    
+//-------------------------Proyect------------------------------------------
+    @PostMapping("/proyect/new")
+    public void agregaproyect(@RequestBody Proyect proye ){
+        proServ.crearProyect(proye);
+    }
+    @GetMapping("/proyect/ver")
+    @ResponseBody    
+    public List<Proyect> verProyecto(){
+        return proServ.verProyect();
+    }
+    @DeleteMapping ("/proyect/delete/{id}")
+    public void borrarProyect ( @PathVariable Long id){
+        proServ.borraProyect(id);
+    }
+    @PostMapping("/proyect/update")
+    public void acualizaProyect(@RequestBody Proyect proyec ){
+        proServ.actualizarProyect(proyec);
+    } 
+//-------------------------------------------------------------------------  
 }
