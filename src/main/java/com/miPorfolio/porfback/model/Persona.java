@@ -24,11 +24,12 @@ public class Persona {
     private String titulo;
     private String about;
     private String wahtsapp;
+    private String copy;
     
     public Persona(){
     }
 
-    public Persona(Long id, String nombre, String apellido, String banner, String fPerfil, String titulo, String about, String wahtsapp) {
+    public Persona(Long id, String nombre, String apellido, String banner, String fPerfil, String titulo, String about, String wahtsapp, String copy) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -37,7 +38,10 @@ public class Persona {
         this.titulo = titulo;
         this.about = about;
         this.wahtsapp = wahtsapp;
+        this.copy = copy;
     }
+
+   
 
   
 

@@ -6,12 +6,14 @@ import com.miPorfolio.porfback.model.Persona;
 import com.miPorfolio.porfback.model.Proyect;
 import com.miPorfolio.porfback.model.Skill;
 import com.miPorfolio.porfback.model.Study;
+import com.miPorfolio.porfback.model.Users;
 import com.miPorfolio.porfback.service.IExperienciaService;
 import com.miPorfolio.porfback.service.IHeaderService;
 import com.miPorfolio.porfback.service.IPersonaService;
 import com.miPorfolio.porfback.service.IProyectService;
 import com.miPorfolio.porfback.service.ISkillService;
 import com.miPorfolio.porfback.service.IStudyService;
+import com.miPorfolio.porfback.service.IUsersService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +34,7 @@ public class Controller {
     @Autowired IExperienciaService expServ;
     @Autowired IHeaderService headServ;
     @Autowired IProyectService proServ;
+    @Autowired IUsersService userServ;
 
     
 //--------------------------- PERSONA ------------------------------  
@@ -160,4 +163,25 @@ public class Controller {
         proServ.actualizarProyect(proyec);
     } 
 //-------------------------------------------------------------------------  
+
+
+//-------------------------Usuarios------------------------------------------
+    @PostMapping("/user/new")
+    public void agregaUser(@RequestBody Users user ){
+        userServ.crearUser(user);
+    }
+    @GetMapping("/user/ver")
+    @ResponseBody    
+    public List<Users> verUser(){
+        return userServ.verUsers();
+    }
+    @DeleteMapping ("/user/delete/{id}")
+    public void borrarUser ( @PathVariable Long id){
+        userServ.borrarUser(id);
+    }
+    @PostMapping("/user/update")
+    public void acualizaUser(@RequestBody Users user ){
+        userServ.atualizarUser(user);
+    }     
+//------------------------------------------------------------------------- 
 }
