@@ -17,14 +17,18 @@ public class Users {
     
     private String usuario;
     private String password;
+    private boolean valido;
 
     public Users() {
     }
 
-    public Users(Long id, String usuario, String password) {
+    public Users(Long id, String usuario, String password, boolean valido) {
         this.id = id;
         this.usuario = usuario;
         this.password = password;
+        this.valido = valido;
     }
+
+   
     
 }
