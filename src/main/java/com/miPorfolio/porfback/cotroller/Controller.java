@@ -14,6 +14,7 @@ import com.miPorfolio.porfback.service.IProyectService;
 import com.miPorfolio.porfback.service.ISkillService;
 import com.miPorfolio.porfback.service.IStudyService;
 import com.miPorfolio.porfback.service.IUsersService;
+import com.miPorfolio.porfback.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import java.util.List;
@@ -39,6 +40,7 @@ public class Controller {
     @Autowired IHeaderService headServ;
     @Autowired IProyectService proServ;
     @Autowired IUsersService userServ;
+    @Autowired JWTUtil jwtUltil;
 
     
 //--------------------------- PERSONA ------------------------------  
@@ -192,19 +194,20 @@ public class Controller {
     }   
     @PostMapping("/user/ok")
     @ResponseBody    
-    public boolean verUser(@RequestBody Users user){
+    public String verUser(@RequestBody Users user){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         
         List<Users> usuarios =  userServ.verUsers();
-        
+       
         for( Users x:usuarios){
             if((argon2.verify(x.getPassword(), user.getPassword()))&&(x.getUsuario().equals(user.getUsuario())) ){
+                String token = jwtUltil.create(user.getId().toString(), user.getUsuario());
                 x.setValido(true);
-                return true;
+                return token;
             }
    
         }
-        return false;
+        return null;
     }
     
     
