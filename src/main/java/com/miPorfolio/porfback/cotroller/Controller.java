@@ -17,6 +17,7 @@ import com.miPorfolio.porfback.service.IUsersService;
 import com.miPorfolio.porfback.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -173,7 +175,7 @@ public class Controller {
 
 //-------------------------Usuarios------------------------------------------
     @PostMapping("/user/new")
-    public void agregaUser(@RequestBody Users user ){
+    public void agregaUser( @RequestBody Users user ){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(1, 1024, 1, user.getPassword());
         user.setPassword(hash);
@@ -185,12 +187,18 @@ public class Controller {
         return userServ.verUsers();
     }
     @DeleteMapping ("/user/delete/{id}")
-    public void borrarUser ( @PathVariable Long id){
-        userServ.borrarUser(id);
+    public void borrarUser ( @RequestHeader(value="Token")String token, @PathVariable Long id){
+        String userId = jwtUltil.getKey(token);
+        if(userId != null){
+            userServ.borrarUser(id );
+        }
     }
     @PostMapping("/user/update")
-    public void acualizaUser(@RequestBody Users user ){
-        userServ.atualizarUser(user);
+    public void acualizaUser(@RequestBody Users user, @RequestHeader(value="Token")String token ){
+        String userId = jwtUltil.getKey(token);
+        if(userId != null){
+            userServ.atualizarUser(user);
+        }
     }   
     @PostMapping("/user/ok")
     @ResponseBody    
