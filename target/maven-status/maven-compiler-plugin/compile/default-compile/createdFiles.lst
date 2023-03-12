@@ -1,14 +1,18 @@
+com\miPorfolio\porfback\model\Users.class
 com\miPorfolio\porfback\service\StudyService.class
 com\miPorfolio\porfback\service\PersonaService.class
 com\miPorfolio\porfback\service\ProyectService.class
 com\miPorfolio\porfback\repository\StudyRepository.class
+com\miPorfolio\porfback\service\IUsersService.class
 com\miPorfolio\porfback\service\IPersonaService.class
 com\miPorfolio\porfback\service\IProyectService.class
+com\miPorfolio\porfback\service\UsersService.class
 com\miPorfolio\porfback\repository\PersonaRepository.class
 com\miPorfolio\porfback\service\SkillService.class
 com\miPorfolio\porfback\model\Persona.class
 com\miPorfolio\porfback\service\IHeaderService.class
 com\miPorfolio\porfback\PorfbackApplication.class
+com\miPorfolio\porfback\repository\UsersRepository.class
 com\miPorfolio\porfback\model\Proyect.class
 com\miPorfolio\porfback\repository\HeaderRepository.class
 com\miPorfolio\porfback\service\ExperienciaService.class
@@ -22,6 +26,7 @@ com\miPorfolio\porfback\WebConfig.class
 com\miPorfolio\porfback\repository\ExperienciaRepository.class
 com\miPorfolio\porfback\cotroller\Controller.class
 com\miPorfolio\porfback\repository\ProyectRepository.class
+com\miPorfolio\porfback\utils\JWTUtil.class
 com\miPorfolio\porfback\repository\SkillRepository.class
 com\miPorfolio\porfback\service\IStudyService.class
 com\miPorfolio\porfback\model\Experiencia.class
