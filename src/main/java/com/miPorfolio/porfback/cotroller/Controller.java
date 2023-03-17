@@ -200,7 +200,7 @@ public class Controller {
             userServ.atualizarUser(user);
         }
     }   
-    @PostMapping("/user/ok")
+    /*@PostMapping("/user/ok")
     @ResponseBody    
     public String verUser(@RequestBody Users user){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
@@ -216,7 +216,24 @@ public class Controller {
    
         }
         return null;
+    }*/
+    @PostMapping("/user/ok")
+    @ResponseBody    
+    public boolean verUser(@RequestBody Users user){
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        
+        List<Users> usuarios =  userServ.verUsers();
+        
+        for( Users x:usuarios){
+            if((argon2.verify(x.getPassword(), user.getPassword()))&&(x.getUsuario().equals(user.getUsuario())) ){
+                x.setValido(true);
+                return true;
+            }
+   
+        }
+        return false;
     }
+    
     
     
 //------------------------------------------------------------------------- 
